@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { Table, Form, ButtonGroup, Button } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import useGetPosts from "../hooks/useGetPosts";
+import Post from "./Post";
 const PostList = () => {
   const { isLoading, isError, error, data } = useGetPosts();
 
@@ -13,6 +13,10 @@ const PostList = () => {
       <div style={{ color: "white" }}>Error: {(error as Error).message}</div>
     );
   }
+
+  const postList = data?.map((post, index) => {
+    return <Post key={post.id} post={post} index={index} />;
+  });
   return (
     <Table striped bordered hover>
       <thead>
@@ -24,30 +28,7 @@ const PostList = () => {
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody>
-        {data?.map((post, index) => {
-          return (
-            <tr>
-              <td>{++index}</td>
-              <td>
-                <Link to="/info">{post.title}</Link>
-              </td>
-              <td>{post.status}</td>
-              <td style={{ textAlign: "center" }}>
-                <Form.Check // prettier-ignore
-                  type="switch"
-                  checked={post.topRate}
-                />
-              </td>
-              <td>
-                <ButtonGroup aria-label="Basic example">
-                  <Button variant="danger">Delete</Button>
-                </ButtonGroup>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
+      <tbody>{postList}</tbody>
     </Table>
   );
 };
