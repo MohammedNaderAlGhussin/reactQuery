@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
-interface DataItem {
+export interface DataItem {
   id: number;
   title: string;
   body: string;
