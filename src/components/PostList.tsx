@@ -1,8 +1,13 @@
 import { Table } from "react-bootstrap";
 import useGetPosts from "../hooks/useGetPosts";
 import Post from "./Post";
-const PostList = () => {
-  const { isLoading, isError, error, data } = useGetPosts();
+import { PostStatusType } from "../types";
+
+interface PostListProps {
+  selectedStatus: PostStatusType;
+}
+const PostList = ({ selectedStatus }: PostListProps) => {
+  const { isLoading, isError, error, data } = useGetPosts(selectedStatus);
 
   if (isLoading) {
     return <div style={{ color: "white" }}>Loading...</div>;
