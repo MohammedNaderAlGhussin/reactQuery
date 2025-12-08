@@ -1,20 +1,22 @@
-import { Row, Col, Form } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import PostList from "../components/PostList";
+import PostFilter from "../components/PostFilter";
+import { useState } from "react";
+import { PostStatusType } from "../types";
 
 const Home = () => {
+  const [selectedStatus, setSelectedStatus] = useState<PostStatusType>("all");
+  console.log(selectedStatus);
   return (
     <Row>
       <Col xs={9}>
-        <PostList />
+        <PostList selectedStatus={selectedStatus} />
       </Col>
       <Col>
-        <h5 style={{ color: "white" }}>Filter By Status</h5>
-        <Form.Select>
-          <option value="">Select Status</option>
-          <option value="Publish">Publish</option>
-          <option value="Draft">Draft</option>
-          <option value="Blocked">Blocked</option>
-        </Form.Select>
+        <PostFilter
+          selectedStatus={selectedStatus}
+          setSelectedStatus={setSelectedStatus}
+        />
       </Col>
     </Row>
   );
