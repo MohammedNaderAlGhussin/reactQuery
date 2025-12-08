@@ -5,8 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Main from "./layouts/Main";
 import Home from "./pages/Home";
-import Create from "./pages/Create";
 import Info from "./pages/Info";
+// import Create from "./pages/Create";
 
 const router = createBrowserRouter([
   {
@@ -17,10 +17,10 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
-      {
-        path: "/create",
-        element: <Create />,
-      },
+      // {
+      //   path: "/create",
+      //   element: <Create />,
+      // },
       {
         path: "/info",
         element: <Info />,
