@@ -1,9 +1,10 @@
-import { DataItem } from "../hooks/useGetPosts";
+
 import { Link } from "react-router-dom";
 import { Form, ButtonGroup, Button } from "react-bootstrap";
+import { PostItem } from "../types";
 
 interface PostProps {
-  post: DataItem;
+  post: PostItem;
   index: number;
 }
 
