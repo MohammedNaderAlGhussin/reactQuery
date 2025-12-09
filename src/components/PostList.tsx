@@ -1,9 +1,10 @@
 import { Button, ButtonGroup, Table } from "react-bootstrap";
-import useGetPosts from "../hooks/useGetPosts";
+import useGetPosts, { fetchPosts } from "../hooks/useGetPosts";
 import Post from "./Post";
 import { PostStatusType } from "../types";
 import useSearch from "../hooks/useSearch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface PostListProps {
   selectedStatus: PostStatusType;
@@ -16,6 +17,17 @@ const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
     paginate
   );
   const searchData = useSearch(searchQuery);
+  const queryClient = useQueryClient();
+
+  // Applying Prefetching technique
+  useEffect(() => {
+    const nextPage = paginate + 1;
+    if (nextPage > 3) return;
+    queryClient.prefetchQuery({
+      queryKey: ["posts", { selectedStatus, paginate: nextPage }],
+      queryFn: () => fetchPosts(selectedStatus, nextPage),
+    });
+  });
 
   if (isLoading || searchData.isLoading) {
     return <div style={{ color: "white" }}>Loading...</div>;
