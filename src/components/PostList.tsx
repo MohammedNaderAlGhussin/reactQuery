@@ -51,11 +51,23 @@ const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
   const postList =
     searchQuery.length > 0 ? (
       searchData.data?.map((post, index) => (
-        <Post key={post.id} post={post} index={index} />
+        <Post
+          key={post.id}
+          post={post}
+          index={index}
+          type="search"
+          searchQuery={searchQuery}
+        />
       ))
     ) : searchQuery.length === 0 ? (
       data?.map((post, index) => (
-        <Post key={post.id} post={post} index={index} />
+        <Post
+          key={post.id}
+          post={post}
+          index={index}
+          type="paginate"
+          paginate={paginate}
+        />
       ))
     ) : (
       <></>
