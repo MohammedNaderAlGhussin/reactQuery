@@ -10,7 +10,8 @@ const SearchQuery = ({ setSearchQuery }: SearchQueryProps) => {
 
   const querySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSearchQuery(query);
+    const clean = query.trim();
+    setSearchQuery(clean);
   };
 
   return (
