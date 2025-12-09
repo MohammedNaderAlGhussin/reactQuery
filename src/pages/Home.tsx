@@ -16,10 +16,12 @@ const Home = () => {
       </Col>
       <Col>
         <SearchQuery setSearchQuery={setSearchQuery} />
-        <PostFilter
-          selectedStatus={selectedStatus}
-          setSelectedStatus={setSelectedStatus}
-        />
+        {searchQuery.length === 0 && (
+          <PostFilter
+            selectedStatus={selectedStatus}
+            setSelectedStatus={setSelectedStatus}
+          />
+        )}
       </Col>
     </Row>
   );
