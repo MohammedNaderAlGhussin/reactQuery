@@ -55,6 +55,7 @@ const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
           key={post.id}
           post={post}
           index={index}
+          //passing type and searchQuery for constructing Link URL in Post component
           type="search"
           searchQuery={searchQuery}
         />
@@ -65,6 +66,7 @@ const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
           key={post.id}
           post={post}
           index={index}
+          //passing type and paginate for constructing Link URL in Post component
           type="paginate"
           paginate={paginate}
         />
