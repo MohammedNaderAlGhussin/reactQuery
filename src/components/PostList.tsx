@@ -1,16 +1,20 @@
-import { Table } from "react-bootstrap";
+import { Button, ButtonGroup, Table } from "react-bootstrap";
 import useGetPosts from "../hooks/useGetPosts";
 import Post from "./Post";
 import { PostStatusType } from "../types";
 import useSearch from "../hooks/useSearch";
+import { useState } from "react";
 
 interface PostListProps {
   selectedStatus: PostStatusType;
   searchQuery: string;
 }
 const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
-  const { isLoading, isError, error, data, isStale, refetch } =
-    useGetPosts(selectedStatus);
+  const [paginate, setPaginate] = useState<number>(1);
+  const { isLoading, isError, error, data, isStale, refetch } = useGetPosts(
+    selectedStatus,
+    paginate
+  );
   const searchData = useSearch(searchQuery);
 
   if (isLoading || searchData.isLoading) {
@@ -68,6 +72,19 @@ const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
         </thead>
         <tbody>{postList}</tbody>
       </Table>
+      {searchQuery.length === 0 && selectedStatus === "all" && (
+        <ButtonGroup aria-label="Basic example">
+          <Button variant="light" onClick={() => setPaginate(1)}>
+            1
+          </Button>
+          <Button variant="light" onClick={() => setPaginate(2)}>
+            2
+          </Button>
+          <Button variant="light" onClick={() => setPaginate(3)}>
+            3
+          </Button>
+        </ButtonGroup>
+      )}
     </>
   );
 };
