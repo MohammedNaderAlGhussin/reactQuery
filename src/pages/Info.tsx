@@ -1,6 +1,6 @@
 const Info = () => {
   return (
-    <div>
+    <div style={{ color: "white" }}>
       <h4>Title:</h4>
       <p>Status:</p>
       <p>Top Rate:</p>
