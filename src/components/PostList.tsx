@@ -9,7 +9,8 @@ interface PostListProps {
   searchQuery: string;
 }
 const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
-  const { isLoading, isError, error, data } = useGetPosts(selectedStatus);
+  const { isLoading, isError, error, data, isStale, refetch } =
+    useGetPosts(selectedStatus);
   const searchData = useSearch(searchQuery);
 
   if (isLoading || searchData.isLoading) {
@@ -29,13 +30,6 @@ const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
       </div>
     );
   }
-  //   const postList = data?.map((post, index) => {
-  //     return (
-  //       searchQuery.length === 0 && (
-  //         <Post key={post.id} post={post} index={index} />
-  //       )
-  //     );
-  //   });
 
   const postList =
     searchQuery.length > 0 ? (
@@ -51,18 +45,30 @@ const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
     );
 
   return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Title</th>
-          <th>Status</th>
-          <th style={{ width: "10%" }}>Top Rate</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>{postList}</tbody>
-    </Table>
+    <>
+      {/* creating a button to refetch/update data after stale time (10s) */}
+      {isStale && searchQuery.length === 0 && (
+        <button
+          className="bg-primary btn"
+          style={{ color: "white", marginBottom: "10px" }}
+          onClick={() => refetch()}
+        >
+          Update Data..
+        </button>
+      )}
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th style={{ width: "10%" }}>Top Rate</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>{postList}</tbody>
+      </Table>
+    </>
   );
 };
 
