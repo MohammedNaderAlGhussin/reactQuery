@@ -3,16 +3,19 @@ import PostList from "../components/PostList";
 import PostFilter from "../components/PostFilter";
 import { useState } from "react";
 import { PostStatusType } from "../types";
+import SearchQuery from "../components/SearchQuery";
 
 const Home = () => {
   const [selectedStatus, setSelectedStatus] = useState<PostStatusType>("all");
-  console.log(selectedStatus);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
   return (
     <Row>
       <Col xs={9}>
-        <PostList selectedStatus={selectedStatus} />
+        <PostList selectedStatus={selectedStatus} searchQuery={searchQuery} />
       </Col>
       <Col>
+        <SearchQuery setSearchQuery={setSearchQuery} />
         <PostFilter
           selectedStatus={selectedStatus}
           setSelectedStatus={setSelectedStatus}
