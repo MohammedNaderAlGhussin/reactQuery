@@ -27,7 +27,8 @@ const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
       queryKey: ["posts", { selectedStatus, paginate: nextPage }],
       queryFn: () => fetchPosts(selectedStatus, nextPage),
     });
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paginate, queryClient]);
 
   if (isLoading || searchData.isLoading) {
     return <div style={{ color: "white" }}>Loading...</div>;
