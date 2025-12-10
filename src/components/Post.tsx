@@ -51,7 +51,7 @@ const Post = ({
         <ButtonGroup aria-label="Basic example">
           <Button
             variant="danger"
-            disabled={selectedStatus !== "all" || deleteAction.isPending}
+            disabled={deleteAction.isPending}
             onClick={() => deleteAction.mutate(post.id)}
           >
             Delete
