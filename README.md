@@ -283,8 +283,6 @@ File: `PostFilter.tsx`
 
 ---
 
-Absolutely — here is a **complete new section** you can add to your README, called:
-
 # 🔍 **React Query Deep Dive: Core Concepts Explained**
 
 It includes **invalidateQueries**, **useMutation**, **useQuery**, **queryClient**, **caching**, **refetching**, **staleTime**, **enabled**, and **query keys** — each with clear explanations and code examples directly from your project.
