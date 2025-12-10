@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Form, ButtonGroup, Button } from "react-bootstrap";
-import { PostItem, PostStatusType } from "../types";
+import { PostItem } from "../types";
 import useRemovePost from "../hooks/useRemovePost";
 
 interface PostProps {
@@ -9,17 +9,9 @@ interface PostProps {
   type?: string;
   paginate?: number;
   searchQuery?: string;
-  selectedStatus?: PostStatusType;
 }
 
-const Post = ({
-  post,
-  index,
-  type,
-  paginate,
-  searchQuery,
-  selectedStatus,
-}: PostProps) => {
+const Post = ({ post, index, type, paginate, searchQuery }: PostProps) => {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Handle the change event for the switch
     console.log(`Post ${post.id} topRate changed to ${e.target.checked}`);

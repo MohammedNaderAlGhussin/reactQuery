@@ -59,7 +59,6 @@ const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
           //passing type and searchQuery for constructing Link URL in Post component
           type="search"
           searchQuery={searchQuery}
-          selectedStatus={selectedStatus}
         />
       ))
     ) : searchQuery.length === 0 ? (
@@ -71,7 +70,6 @@ const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
           //passing type and paginate for constructing Link URL in Post component
           type="paginate"
           paginate={paginate}
-          selectedStatus={selectedStatus}
         />
       ))
     ) : (
