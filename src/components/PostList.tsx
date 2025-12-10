@@ -5,6 +5,7 @@ import { PostStatusType } from "../types";
 import useSearch from "../hooks/useSearch";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import useRemovePost from "../hooks/useRemovePost";
 
 interface PostListProps {
   selectedStatus: PostStatusType;
@@ -18,6 +19,7 @@ const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
   );
   const searchData = useSearch(searchQuery);
   const queryClient = useQueryClient();
+  const deleteAction = useRemovePost();
 
   // Applying Prefetching technique
   useEffect(() => {
@@ -30,7 +32,7 @@ const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paginate, queryClient]);
 
-  if (isLoading || searchData.isLoading) {
+  if (isLoading || searchData.isLoading || deleteAction.isPending) {
     return <div style={{ color: "white" }}>Loading...</div>;
   }
 
@@ -58,6 +60,7 @@ const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
           //passing type and searchQuery for constructing Link URL in Post component
           type="search"
           searchQuery={searchQuery}
+          selectedStatus={selectedStatus}
         />
       ))
     ) : searchQuery.length === 0 ? (
@@ -69,6 +72,7 @@ const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
           //passing type and paginate for constructing Link URL in Post component
           type="paginate"
           paginate={paginate}
+          selectedStatus={selectedStatus}
         />
       ))
     ) : (
