@@ -1,6 +1,10 @@
 import axios, { AxiosError } from "axios";
 import { CommentItem, CommentResponse } from "../types";
-import { useMutation, UseMutationResult } from "@tanstack/react-query";
+import {
+  useMutation,
+  UseMutationResult,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 const addComment = async (comment: CommentItem): Promise<CommentResponse> => {
   const res = await axios.post<CommentResponse>(
@@ -14,10 +18,13 @@ const useAddComment = (): UseMutationResult<
   AxiosError,
   CommentItem
 > => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: addComment,
-    onSuccess: (data) => {
-      console.log("Comment added successfully:", data);
+    onSuccess: () => {
+      // Invalidate and refetch comments query to get the latest comments
+      // exact: false to invalidate all comments related queries (key starts with "comments")
+      queryClient.invalidateQueries({ queryKey: ["comments"], exact: false });
     },
   });
 };
