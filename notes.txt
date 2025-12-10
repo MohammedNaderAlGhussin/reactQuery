@@ -1,0 +1,41 @@
+= when should fetch data with react query, redux to dispatch data and save it localy and access it globaly
+
+
+when using redux with react-query, you can dispatch the actions im multiple ways:
+
+
+1. Inside React-query hooks:
+
+    a. if im using useMutation => then use it inside useMutate in the react-query hooks 
+    b. onError (inside react-query hooks)
+    c. onSucess (inside react-query hooks)
+
+2. Outside react-query hooks: (compnents)
+
+ ex:   addComment.mutate(
+      {
+        body: comment,
+        post_id: +id,
+      },
+      {
+        onSuccess: () => {
+          dispatch(...)
+        },
+        onSeteled: () => {
+            dispatch(...)
+        },
+        onError: () => {
+            dispatch(...)
+        }
+      }
+    );    
+
+3. with the query itself:
+
+ex: const { isLoading, isError, error, data, isStale, refetch } = useGetPosts(
+    selectedStatus,
+    paginate
+  );
+
+- we can destructure (onSuccess,onError ..etc) and inside useEffect.
+    - the useEffect should be listening in the depeindincy array [] on the actions (onSuccess ...etc)
