@@ -120,5 +120,16 @@
       "topRate": false
     }
   ],
-  "comments": []
+  "comments": [
+    {
+      "body": "first comment",
+      "postId": 1,
+      "id": 1
+    },
+    {
+      "body": "second comment",
+      "postId": 2,
+      "id": 2
+    }
+  ]
 }
