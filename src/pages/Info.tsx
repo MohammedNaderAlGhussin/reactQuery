@@ -34,7 +34,7 @@ const Info = () => {
     addComment.mutate(
       {
         body: comment,
-        postId: +id,
+        post_id: +id,
       },
       {
         onSuccess: () => {

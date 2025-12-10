@@ -2,17 +2,17 @@ import axios from "axios";
 import { CommentResponse } from "../types";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
-const fetchComments = async (postId: string): Promise<CommentResponse[]> => {
+const fetchComments = async (post_id: string): Promise<CommentResponse[]> => {
   const res = await axios.get<CommentResponse[]>(
-    `http://localhost:3009/comments?post_id=${postId}&_sort=id&_order=desc`
+    `http://localhost:3009/comments?post_id=${post_id}&_sort=id&_order=desc`
   );
   return res.data;
 };
 
-const useGetComments = (postId: string): UseQueryResult<CommentResponse[]> => {
+const useGetComments = (post_id: string): UseQueryResult<CommentResponse[]> => {
   const query = useQuery({
-    queryKey: ["comments", { postId: +postId }],
-    queryFn: () => fetchComments(postId),
+    queryKey: ["comments", { post_id: +post_id }],
+    queryFn: () => fetchComments(post_id),
   });
   return query;
 };

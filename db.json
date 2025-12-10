@@ -123,13 +123,18 @@
   "comments": [
     {
       "body": "first comment",
-      "postId": 1,
+      "post_id": 3,
       "id": 1
     },
     {
-      "body": "second comment",
-      "postId": 2,
+      "body": "post one first comment",
+      "post_id": 1,
       "id": 2
+    },
+    {
+      "body": "5th post first comment",
+      "post_id": 5,
+      "id": 3
     }
   ]
 }

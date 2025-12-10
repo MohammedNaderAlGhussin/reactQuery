@@ -10,11 +10,11 @@ export type PostStatusType = "published" | "draft" | "block" | "all";
 export type PostItemStatusType = Exclude<PostStatusType, "all">;
 
 export interface CommentItem {
-  postId: number;
+  post_id: number;
   body: string;
 }
 export interface CommentResponse {
   id: number;
-  postId: number;
+  post_id: number;
   body: string;
 }
