@@ -39,3 +39,7 @@ ex: const { isLoading, isError, error, data, isStale, refetch } = useGetPosts(
 
 - we can destructure (onSuccess,onError ..etc) and inside useEffect.
     - the useEffect should be listening in the depeindincy array [] on the actions (onSuccess ...etc)
+
+
+
+= you can handel loading and making it global by using (useIsFetching)
