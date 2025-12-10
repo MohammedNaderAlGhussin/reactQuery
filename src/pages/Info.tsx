@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import useGetPost from "../hooks/useGetPost";
 import { useState } from "react";
 import useAddComment from "../hooks/useAddComment";
+import useGetComments from "../hooks/useGetComments";
 
 const Info = () => {
   const [searchParams] = useSearchParams();
@@ -15,6 +16,8 @@ const Info = () => {
 
   const { data, isLoading, error, isError } = useGetPost(id, type, key);
   const addComment = useAddComment();
+
+  const getComments = useGetComments(id);
 
   if (isLoading) {
     return <div style={{ color: "white" }}>Loading...</div>;
@@ -81,6 +84,13 @@ const Info = () => {
               Submit
             </Button>
           </Form>
+
+          {getComments.isLoading || getComments.isFetching
+            ? //isFetching covers both loading and refetching states if data was cached
+              "Loading comments..."
+            : getComments.data?.map((comment) => {
+                return <p key={comment.id}>{comment.body}</p>;
+              })}
         </div>
       </Col>
     </Row>
