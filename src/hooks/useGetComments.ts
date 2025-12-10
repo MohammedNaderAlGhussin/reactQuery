@@ -11,9 +11,8 @@ const fetchComments = async (postId: string): Promise<CommentResponse[]> => {
 
 const useGetComments = (postId: string): UseQueryResult<CommentResponse[]> => {
   const query = useQuery({
-    queryKey: ["comments", postId], 
+    queryKey: ["comments", { postId: +postId }],
     queryFn: () => fetchComments(postId),
-    staleTime: 1000 * 10, // 10 seconds
   });
   return query;
 };
