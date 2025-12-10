@@ -4,8 +4,7 @@ import Post from "./Post";
 import { PostStatusType } from "../types";
 import useSearch from "../hooks/useSearch";
 import { useEffect, useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
-import useRemovePost from "../hooks/useRemovePost";
+import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 
 interface PostListProps {
   selectedStatus: PostStatusType;
@@ -13,13 +12,13 @@ interface PostListProps {
 }
 const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
   const [paginate, setPaginate] = useState<number>(1);
-  const { isLoading, isError, error, data, isStale, refetch } = useGetPosts(
+  const { isError, error, data, isStale, refetch } = useGetPosts(
     selectedStatus,
     paginate
   );
   const searchData = useSearch(searchQuery);
   const queryClient = useQueryClient();
-  const deleteAction = useRemovePost();
+  const globalLoading = useIsFetching();
 
   // Applying Prefetching technique
   useEffect(() => {
@@ -32,7 +31,7 @@ const PostList = ({ selectedStatus, searchQuery }: PostListProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paginate, queryClient]);
 
-  if (isLoading || searchData.isLoading || deleteAction.isPending) {
+  if (globalLoading) {
     return <div style={{ color: "white" }}>Loading...</div>;
   }
 
