@@ -77,7 +77,7 @@ const Info = () => {
               />
             </Form.Group>
             <Button
-              variant="primary"
+              variant="primary "
               type="submit"
               disabled={addComment.isPending}
             >
